@@ -1,22 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
   const [jsonText, setJsonText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const jsonTextRef = useRef();
 
-  useEffect(() => {
-    if (jsonText === "") {
-      setJsonText(jsonTextRef.current?.value);
-    }
-  }, [jsonText]);
+  const handleJsonClear = () => {
+    setJsonText("");
+  };
 
   const handleJsonFormat = () => {
+    if (!jsonText) return;
     try {
       const formattedJsonText = JSON.stringify(JSON.parse(jsonText), null, 2);
-      jsonTextRef.current.value = formattedJsonText;
-      setJsonText("");
+      setJsonText(formattedJsonText);
     } catch (err) {
       setErrorMsg(err.message);
     }
@@ -25,12 +22,17 @@ function App() {
   return (
     <>
       <div className="menu">
-        <button className="btn-format" onClick={handleJsonFormat}>
+        <div className="title">JSON Viewer</div>
+        <button className="btn btn-clear" onClick={handleJsonClear}>
+          Clear
+        </button>
+        <button className="btn btn-format" onClick={handleJsonFormat}>
           Format
         </button>
         <div className="error-msg">{errorMsg}</div>
       </div>
       <textarea
+        value={jsonText}
         className="json-text"
         onChange={(e) => {
           setJsonText(e.target.value);
