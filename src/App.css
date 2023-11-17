@@ -1,0 +1,33 @@
+#root {   
+  margin: 0 auto; 
+  text-align: center;
+  box-sizing:border-box
+} 
+.menu {
+  width: 100vw;
+}
+.btn-format{
+    width: 100vw;
+    line-height: 1.5rem;
+    cursor: pointer;     
+ } 
+
+ .json-text{
+    border: none;
+    margin: 0;
+    padding: 0%;
+    resize: none;
+    width: 100vw;
+    height: calc(100vh - 3rem);
+ }
+
+ .error-msg {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  border-radius: 0.8rem;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  background-color: red;
+  border: salmon sold 1px;
+ }
