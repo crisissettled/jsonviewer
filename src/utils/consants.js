@@ -5,4 +5,8 @@ export const FORMAT_TYPES = [
   { type: "css", name: "CSS" },
 ];
 
-export const LOCAL_STORAGE_KEY = "code_formatter";
+const CODE_FORMAT_TYPE = "codeFormatType";
+const CODE_FORMAT_CODE_TEXT = "codeFormatCodeText";
+const CODE_FORMAT_DARK_MODE = "codeFormatDarkMode";
+
+export { CODE_FORMAT_TYPE, CODE_FORMAT_CODE_TEXT, CODE_FORMAT_DARK_MODE };
