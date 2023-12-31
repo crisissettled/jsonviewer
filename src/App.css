@@ -30,7 +30,7 @@
   position: absolute;
   top:1rem;
   right:1rem;
-  width: 45px;
+  width: 38px;
   display: flex;
   padding: 2px;
   display: block;
@@ -47,7 +47,7 @@
 }
 
 .toggle-inner{
-  width: 20px;
+  width: 15px;
   height: 15px;
   border-radius: 1000px;
   transition: margin-left 0.2s ease-in, background-color 0.2s ease-in;   
@@ -55,11 +55,11 @@
 
 .toggle-inner-light-mode {
   background-color: var(--light-color);
-  margin-left: 20px;
 }
 
 .toggle-inner-dark-mode  {
   background-color: var(--dark-color);
+  margin-left: 20px;
 }
 
 .format-type {

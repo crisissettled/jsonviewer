@@ -88,6 +88,7 @@ export default function App() {
         </div>
 
         <div
+          title="Switch between dark and light mode (currently light mode)"
           className={`toggle ${
             darkMode ? "toggle-dark-mode" : "toggle-light-mode"
           }`}
