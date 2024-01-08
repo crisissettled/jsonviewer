@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import {
   CODE_FORMAT_CODE_TEXT,
@@ -16,11 +16,16 @@ export default function App() {
   const [codeText, setCodeText] = useLocalStorage(CODE_FORMAT_CODE_TEXT, "");
   const [formatType, setFormatType] = useLocalStorage(CODE_FORMAT_TYPE, "json");
   const [darkMode, setDarkMode] = useLocalStorage(CODE_FORMAT_DARK_MODE, false);
+  const [wordCount, setWordCount] = useState({
+    wordCount: null,
+    charCount: null,
+  });
   const editorRef = useRef(null);
 
   useEffect(() => {
     if (codeText && editorRef.current) {
       editorRef.current?.getAction("editor.action.formatDocument").run();
+      countWordAndChar(codeText);
     }
   }, [formatType, codeText]);
 
@@ -52,6 +57,29 @@ export default function App() {
 
   const formatCode = () => {
     editorRef.current.getAction("editor.action.formatDocument").run();
+    countWordAndChar(codeText);
+  };
+
+  const countWordAndChar = (txt) => {
+    const newLineChar = "\n";
+    if (txt) {
+      const trimmedText = txt.trim(newLineChar);
+      const words = trimmedText.split(" ").filter((x) => x !== "");
+      let wordCountAdjust = 0;
+      for (let w of words) {
+        const newLineIndex = w.indexOf(newLineChar);
+        if (newLineIndex > -1) {
+          wordCountAdjust += 1;
+        }
+      }
+
+      const wordCount = words.length + wordCountAdjust;
+
+      const regx = /\n/g;
+      const charCount = txt.replace(regx, "").length;
+
+      setWordCount({ wordCount, charCount });
+    }
   };
 
   return (
@@ -71,6 +99,13 @@ export default function App() {
               </option>
             ))}
           </select>
+          {wordCount.wordCount && wordCount.wordCount && (
+            <span
+              className={`word-count ${darkMode ? "general-dark-mode" : ""}`}
+            >
+              {wordCount.wordCount} words, {wordCount.charCount} characters
+            </span>
+          )}
         </div>
         <div>
           <button
