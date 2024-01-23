@@ -1,8 +1,10 @@
-# React + Vite
+# build image
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+docker build -t crisissettled/jsonviewer:v1.3 .
 
-Currently, two official plugins are available:
+# publish to docker hub
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+docker push crisissettled/jsonviewer:v1.3
+
+#deploy
+sudo docker run -d --restart always --name jsonviewer -p 80:80 crisissettled/jsonviewer:v1.3
